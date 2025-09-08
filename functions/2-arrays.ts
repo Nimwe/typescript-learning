@@ -3,8 +3,17 @@
  * 
  * Retourne -1 si le tableau est vide.
  */
-export function getFirstNumber(): void {
+export function getFirstNumber(numbers: number[]): number {
+    if (numbers.length === 0) {
+        return -1;
+    }
+    return numbers[0];
 }
+// Tableau non vide
+console.log(getFirstNumber([5, 10, 15])) // affichera 5
+
+// Tableau vide
+console.log(getFirstNumber([])) // affichera -1
 
 /**
  * Retourne le dernier élément d'un tableau de string
@@ -12,8 +21,25 @@ export function getFirstNumber(): void {
  * @param songs Liste de chansons
  * @returns La dernière chaîne de caractères
  */
-export function getLastSongPlayed(): void {
+export function getLastSongPlayed(songs: string[]): string {
+    if (songs.length === 0) {
+        return ''
+    }
+    return songs[songs.length - 1]
 }
+
+// Test console
+const songsList = [
+    'Flowers by Miley Cyrus',
+    'Resolution by Matt Corby',
+    'Green and Gold by Lianne La Havas',
+    'The Way Things Were by Isaac Waddington',
+    'Breezeblocks by Alt-j',
+]
+
+console.log(getLastSongPlayed(songsList))
+console.log(getLastSongPlayed(['song1', 'song2', 'song3']))
+console.log(getLastSongPlayed([]))
 
 /**
  * Retrouve le mot le plus long d'un tableau de strings.
@@ -31,8 +57,23 @@ export function findLongestWord(): void {
  * @param length La taille du tableau à créer (number)
  * @param defaultValue La valeur par défaut (string)
  */
-export function fillArrayWithDefaultValue(): void {
+export function fillArrayWithDefaultValue(length: number, defaultValue: string): string[] {
+    const result = Array(length).fill(defaultValue)
+
+    // Test de vérification 
+    console.log('Taille du tableau :', result.length)
+    console.log('Contenu du tableau :', result)
+
+    return result
 }
+
+// Test des tableaux
+
+fillArrayWithDefaultValue(1, "test")
+
+fillArrayWithDefaultValue(5, "test")
+
+fillArrayWithDefaultValue(3, "hello")
 
 /**
  * Trie un tableau de chaînes de caractères par taille croissante de chaîne.
@@ -44,8 +85,30 @@ export function fillArrayWithDefaultValue(): void {
  * @param arrayToSort Le tableau de chaînes de caractères à trier
  * @returns Le tableau trié
  */
-export function sortBySize(): void {
+export function sortBySize(arrayToSort: string[]): string[] {
+    // Création d'un nouveau tableau pour ne pas modifier l'original
+    const sortedArray = [...arrayToSort].sort((a, b) => a.length - b.length)
+
+    // --- Console logs pour vérification ---
+    console.log('Tableau original :', arrayToSort)
+    console.log('Tableau trié     :', sortedArray)
+
+    return sortedArray
 }
+
+// --- Exemples de console.log ---
+sortBySize(['hello', 'world'])
+// Tableau original : ['hello', 'world']
+// Tableau trié     : ['hello', 'world']
+
+sortBySize([
+    'bumbling',
+    'semiprecious',
+    'discombobulated',
+    'aaaaaa',
+    'giraffe',
+    'numbskull',
+])
 
 // ----------- TABLEAUX AVEC DES UNIONS -----------
 
@@ -55,8 +118,24 @@ export function sortBySize(): void {
  * @param array Utilisation d'un tableau avec types multiples : https://www.geeksforgeeks.org/defining-array-with-multiple-types-in-typescript/
  * @returns Le résultat de la somme de type "number"
  */
-export function sumStringsAndNumbers(): void {
+export function sumStringsAndNumbers(array: (number | string)[]): number {
+    const total = array.reduce((acc: number, val: number | string) => {
+        // Convertit val en nombre si c'est une string
+        const num = typeof val === 'string' ? parseFloat(val) : val
+        return acc + num
+    }, 0)
+
+    console.log('Tableau original :', array)
+    console.log('Somme totale     :', total)
+
+    return total
 }
+
+// Test
+sumStringsAndNumbers(['2', 1, '43', 2])
+sumStringsAndNumbers(['2', 1, '43', 2, 98, '100'])
+
+
 
 /**
  * Traite un tableau pouvant contenir des "string" mais également des éléments "null".
@@ -68,7 +147,7 @@ export function sumStringsAndNumbers(): void {
  * @returns Tableau de chaînes de caractères résultat
  */
 export function stringsOnly(): void {
- }
+}
 
 // ----------- TUPLES -----------
 
@@ -111,5 +190,5 @@ export enum Direction {
  * @param direction Enum présentant une direction (North, South, East, West)
  * @returns Les nouvelles coordonnées (tuple)
  */
-export function getNextMapCoord(): void { 
+export function getNextMapCoord(): void {
 }

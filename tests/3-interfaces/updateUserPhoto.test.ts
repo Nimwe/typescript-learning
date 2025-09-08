@@ -2,15 +2,15 @@ import { describe, it, expect } from 'vitest'
 import { updateUserPhoto } from '../../functions/3-interfaces'
 
 describe('updateUserPhoto', () => {
-  const user = {
+  const user2 = {
     name: 'Amy',
     verified: false,
   }
-  const actual = updateUserPhoto(user, 'https://example.com/amy.jpg')
+  const actual = updateUserPhoto(user2, 'https://example.com/amy.jpg')
 
   it('returns a (new) object', () => {
     expect(typeof actual).toBe('object')
-    expect(actual).not.toBe(user)
+    expect(actual).not.toBe(user2)
   })
 
   it('returns an object with the correct properties', () => {
